@@ -13,7 +13,7 @@
 - RULE-SET：Rule Provider 规则匹配
 - MATCH：全匹配
 
-```bash
+```yaml
 - DOMAIN-KEYWORD,dwai,🎯 全球直连
 - DOMAIN-KEYWORD,cn,🎯 全球直连
 ```
