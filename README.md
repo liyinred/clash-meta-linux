@@ -1,4 +1,3 @@
-
 <div align="center">
    <h1>自用clash规则,cn域名和特定网站直连(黑名单模式)</h1>
 </div>
