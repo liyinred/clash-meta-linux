@@ -19,6 +19,36 @@
 ```yaml
 - DOMAIN-KEYWORD,dwai,🎯 全球直连
 - DOMAIN-KEYWORD,cn,🎯 全球直连
+
+
+regexp:.*.cn.*,
+regexp:.*hunau.*,
+regexp:.*baidu.*,
+regexp:.*delivery.mp.microsoft.*,
+regexp:.*163.*,
+regexp:.*chaoxing.*,
+regexp:.*bing.*,
+regexp:.*steamserver.*,
+regexp:.*steamstatic.*,
+regexp:.*dwai.life.*,
+regexp:.*tearemix.*,
+
+
+keyword:baidu,
+keyword:cn,
+keyword:hunau,
+keyword:baidu,
+keyword:delivery.mp.microsoft,
+keyword:163,
+keyword:chaoxing,
+keyword:bing,
+keyword:steamserver,
+keyword:steamstatic,
+keyword:dwai.life,
+keyword:tearemix,
+
+
+
 ```
 
 
