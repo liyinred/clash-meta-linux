@@ -1,5 +1,5 @@
 # 自用clash规则,cn域名和特定网站直连(黑名单模式)
-目前 Clash 支持的规则类型如下：
+**目前 Clash 支持的规则类型如下：**
 
 - DOMAIN-SUFFIX：域名后缀匹配
 - DOMAIN：域名匹配
