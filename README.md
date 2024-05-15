@@ -117,3 +117,6 @@ keyword:tearemix,
   - 使用例子：将10英里转换成公里。
 - **逻辑运算符**: `solar OR lunar`
   - 使用例子：搜索含有“solar”（太阳的）或“lunar”（月亮的）的页面。
+
+
+ipconfig /flushdns
