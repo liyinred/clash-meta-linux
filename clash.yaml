@@ -8,20 +8,21 @@ dns:
   proxy-server-nameserver:
     - 8.8.8.8
 proxies:
-  - {name: 🇭🇰 香港 01, server: china1.yushe.link, port: 30001, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇭🇰 香港 02, server: china1.yushe.link, port: 30002, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇭🇰 香港 03, server: china1.yushe.link, port: 30003, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇭🇰 香港 04, server: china1.yushe.link, port: 30004, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇹🇼 台湾 01, server: china1.yushe.link, port: 30011, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇹🇼 台湾 02, server: china1.yushe.link, port: 30012, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇸🇬 狮城 01, server: china1.yushe.link, port: 30021, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇸🇬 狮城 02, server: china1.yushe.link, port: 30022, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇯🇵 日本 01, server: china2.yushe.link, port: 30031, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇯🇵 日本 02, server: china2.yushe.link, port: 30032, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇺🇸 美国 01, server: china2.yushe.link, port: 30041, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇺🇸 美国 02, server: china2.yushe.link, port: 30042, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇰🇷 韩国 01, server: china2.yushe.link, port: 30051, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
-  - {name: 🇰🇷 韩国 02, server: china2.yushe.link, port: 30052, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: b5c0e0b9-c34e-4680-87b0-dbfc2d3f84cd, tfo: true}
+  - {name: 🇭🇰 香港 01, server: china1.yushe.link, port: 30001, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇭🇰 香港 02, server: china1.yushe.link, port: 30002, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇭🇰 香港 03, server: china1.yushe.link, port: 30003, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇭🇰 香港 04, server: china1.yushe.link, port: 30004, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇹🇼 台湾 01, server: china1.yushe.link, port: 30011, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇹🇼 台湾 02, server: china1.yushe.link, port: 30012, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇸🇬 狮城 01, server: china1.yushe.link, port: 30021, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇸🇬 狮城 02, server: china1.yushe.link, port: 30022, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇯🇵 日本 01, server: china2.yushe.link, port: 30031, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇯🇵 日本 02, server: china2.yushe.link, port: 30032, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇺🇸 美国 01, server: china2.yushe.link, port: 30041, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇺🇸 美国 02, server: china2.yushe.link, port: 30042, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇰🇷 韩国 01, server: china2.yushe.link, port: 30051, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇰🇷 韩国 02, server: china2.yushe.link, port: 30052, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
+  - {name: 🇬🇧 英国 01, server: china4.yushe.link, port: 30062, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -41,6 +42,7 @@ proxy-groups:
       - 🇺🇸 美国 02
       - 🇰🇷 韩国 01
       - 🇰🇷 韩国 02
+      - 🇬🇧 英国 01
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -70,6 +72,7 @@ proxy-groups:
       - 🇺🇸 美国 02
       - 🇰🇷 韩国 01
       - 🇰🇷 韩国 02
+      - 🇬🇧 英国 01
 rules:
   - DOMAIN-KEYWORD,.cn,🎯 全球直连
 
