@@ -1,16 +1,12 @@
-port: 7890
-socks-port: 7891
-allow-lan: true
-mode: Rule
-log-level: info
-external-controller: :9090
 dns:
   enabled: true
   ipv6: false
   nameserver:
-    - 223.5.5.5
-  proxy-server-nameserver:
-    - 8.8.8.8
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://dns.google/dns-query
+    - https://1.1.1.1/dns-query
 proxies:
   - {name: 🇭🇰 香港 01, server: china1.yushe.link, port: 30001, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
   - {name: 🇭🇰 香港 02, server: china1.yushe.link, port: 30002, client-fingerprint: chrome, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, tfo: true}
@@ -78,8 +74,7 @@ proxy-groups:
       - 🇰🇷 韩国 02
       - 🇬🇧 英国 01
 rules:
-  - DOMAIN-KEYWORD,.cn,🎯 全球直连
-
+  - DOMAIN-SUFFIX,cn,🎯 全球直连
   - DOMAIN-SUFFIX,time.is,🎯 全球直连
   - DOMAIN-KEYWORD,spotify,🎯 全球直连
   - DOMAIN-SUFFIX,steamserver.net,🎯 全球直连
@@ -88,8 +83,7 @@ rules:
   - DOMAIN-SUFFIX,mechrevo.com,🎯 全球直连
   - DOMAIN-SUFFIX,chaoxing.com,🎯 全球直连
   - DOMAIN-SUFFIX,koyso.com,🎯 全球直连
-  - GEOSITE,CN,🎯 全球直连
 
-  - GEOIP,PRIVATE,🎯 全球直连
+  - GEOIP,PRIVATE,🎯 全球直连,no-resolve
   - GEOIP,CN,🎯 全球直连
   - MATCH,🐟 漏网之鱼
