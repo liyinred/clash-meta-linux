@@ -82,7 +82,6 @@ rules:
   - DOMAIN-SUFFIX,tearemix.com,🎯 全球直连
   - DOMAIN-SUFFIX,mechrevo.com,🎯 全球直连
   - DOMAIN-SUFFIX,chaoxing.com,🎯 全球直连
-  - DOMAIN-SUFFIX,koyso.com,🎯 全球直连
 
   - GEOIP,PRIVATE,🎯 全球直连,no-resolve
   - GEOIP,CN,🎯 全球直连
