@@ -87,6 +87,7 @@ rules:
   - DOMAIN-SUFFIX,chaoxing.com,🎯 全球直连
   - DOMAIN-SUFFIX,steamzg.com,🎯 全球直连
   - DOMAIN-SUFFIX,qq.com,🎯 全球直连
+  - DOMAIN-SUFFIX,bytedance.net,🎯 全球直连
 
   - GEOIP,PRIVATE,🎯 全球直连,no-resolve
   - GEOIP,CN,🎯 全球直连
