@@ -108,5 +108,6 @@ rules:
   - DOMAIN-SUFFIX,microsoft.com,🎯 全球直连
 
   - GEOIP,PRIVATE,🎯 全球直连,no-resolve
-  - GEOIP,CN,🎯 全球直连
+  - GEOSITE,cn,🎯 全球直连
+  - GEOIP,cn,🎯 全球直连
   - MATCH,🐟 漏网之鱼
