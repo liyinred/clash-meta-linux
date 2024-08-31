@@ -109,5 +109,6 @@ rules:
 
   - GEOIP,PRIVATE,🎯 全球直连,no-resolve
   - GEOSITE,cn,🎯 全球直连
+  - GEOSITE,geolocation-!cn,🚀 节点选择
   - GEOIP,cn,🎯 全球直连
   - MATCH,🐟 漏网之鱼
