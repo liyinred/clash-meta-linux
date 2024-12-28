@@ -1,68 +1,147 @@
-dns:
-  enabled: true
-  ipv6: false
-  nameserver:
-    - https://dns.alidns.com/dns-query
-  fallback:
-    - https://dns.google/dns-query
-
-mixed-port: 7890
+port: 7890
+socks-port: 7891
 allow-lan: true
-bind-address: '*'
-mode: rule
+mode: Rule
 log-level: info
-external-controller: '127.0.0.1:9090'
-dns:
-    enable: true
-    ipv6: false
-    default-nameserver: [223.5.5.5, 119.29.29.29]
-    enhanced-mode: fake-ip
-    fake-ip-range: 198.18.0.1/16
-    use-hosts: true
-    nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
-    fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
-    fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
-
+external-controller: 127.0.0.1:9090
 proxies:
-  - {name: 🇭🇰 香港 01, server: china1.yushe.link, port: 30001, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇭🇰 香港 02, server: china1.yushe.link, port: 30002, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇭🇰 香港 03, server: china1.yushe.link, port: 30003, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇭🇰 香港 04, server: china1.yushe.link, port: 30004, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇨🇳 台湾 01, server: china1.yushe.link, port: 30011, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇨🇳 台湾 02, server: china1.yushe.link, port: 30012, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇸🇬 狮城 01, server: china2.yushe.link, port: 30021, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇸🇬 狮城 02, server: china2.yushe.link, port: 30022, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇯🇵 日本 01, server: china3.yushe.link, port: 30031, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇯🇵 日本 02, server: china3.yushe.link, port: 30032, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇺🇲 美国 01, server: china3.yushe.link, port: 30041, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇺🇲 美国 02, server: china3.yushe.link, port: 30042, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇰🇷 韩国 01, server: china4.yushe.link, port: 30051, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇰🇷 韩国 02, server: china4.yushe.link, port: 30052, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇩🇪 德国 01, server: china4.yushe.link, port: 30061, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇬🇧 英国 01, server: china4.yushe.link, port: 30062, type: ss, cipher: aes-128-gcm, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, udp: true}
-  - {name: 🇯🇵 日本 | 新疆专用, server: xjcdnnode.xsouo.link, port: 443, type: trojan, password: 7a08f280-6ffc-4224-916e-439bcf7d0af8, sni: xjcdnnode.xsouo.link, udp: true}
+  - {name: 🇭🇰 香港01-IEPL-倍率1.0, server: cdn.hk1.ec.sx.cn, port: 2011, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇭🇰 香港02-IEPL-倍率1.0, server: cdn.hk2.ec.sx.cn, port: 2012, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇭🇰 香港03-IEPL-倍率1.0, server: cdn.hk3.ec.sx.cn, port: 2013, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇭🇰 香港04-IEPL-倍率1.0, server: cdn.hk4.ec.sx.cn, port: 2014, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇭🇰 香港05-IEPL-倍率1.0, server: cdn.hk5.ec.sx.cn, port: 2015, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇭🇰 香港06-IEPL-倍率1.0, server: cdn.hk6.ec.sx.cn, port: 2016, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇳 台湾01-IEPL-倍率1.0, server: cdn.tw1.ec.sx.cn, port: 2021, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇳 台湾02-IEPL-倍率1.0, server: cdn.tw2.ec.sx.cn, port: 2022, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇳 台湾03-IEPL-倍率1.0, server: cdn.tw3.ec.sx.cn, port: 2023, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇳 台湾04-IEPL-倍率1.0, server: cdn.tw4.ec.sx.cn, port: 2024, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇳 台湾05-IEPL-倍率1.0, server: cdn.tw5.ec.sx.cn, port: 2025, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇳 台湾06-IEPL-倍率1.0, server: cdn.tw6.ec.sx.cn, port: 2026, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇸🇬 新加坡01-IEPL-倍率1.0, server: cdn.sg1.ec.sx.cn, port: 2031, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇸🇬 新加坡02-IEPL-倍率1.0, server: cdn.sg2.ec.sx.cn, port: 2032, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇸🇬 新加坡03-IEPL-倍率1.0, server: cdn.sg3.ec.sx.cn, port: 2033, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇸🇬 新加坡04-IEPL-倍率1.0, server: cdn.sg4.ec.sx.cn, port: 2034, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇸🇬 新加坡05-IEPL-倍率1.0, server: cdn.sg5.ec.sx.cn, port: 2035, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇸🇬 新加坡06-IEPL-倍率1.0, server: cdn.sg6.ec.sx.cn, port: 2036, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇯🇵 日本01-IEPL-倍率1.0, server: cdn.jp1.ec.sx.cn, port: 2041, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇯🇵 日本02-IEPL-倍率1.0, server: cdn.jp2.ec.sx.cn, port: 2042, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇯🇵 日本03-IEPL-倍率1.0, server: cdn.jp3.ec.sx.cn, port: 2043, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇯🇵 日本04-IEPL-倍率1.0, server: cdn.jp4.ec.sx.cn, port: 2044, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇯🇵 日本05-IEPL-倍率1.0, server: cdn.jp5.ec.sx.cn, port: 2045, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇯🇵 日本06-IEPL-倍率1.0, server: cdn.jp6.ec.sx.cn, port: 2046, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇰🇷 韩国01-IEPL-倍率1.0, server: cdn.kr1.ec.sx.cn, port: 2051, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇰🇷 韩国02-IEPL-倍率1.0, server: cdn.kr2.ec.sx.cn, port: 2052, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇺🇲 美国01-IEPL-倍率1.0, server: cdn.us1.ec.sx.cn, port: 2061, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇺🇲 美国02-IEPL-倍率1.0, server: cdn.us2.ec.sx.cn, port: 2062, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇺🇲 美国03-IEPL-倍率1.0, server: cdn.us3.ec.sx.cn, port: 2063, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇺🇲 美国04-IEPL-倍率1.0, server: cdn.us4.ec.sx.cn, port: 2064, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇺🇲 美国05-IEPL-倍率1.0, server: cdn.us5.ec.sx.cn, port: 2065, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇺🇲 美国06-IEPL-倍率1.0, server: cdn.us6.ec.sx.cn, port: 2066, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇮🇳 印度01-IEPL-倍率1.0, server: cdn.in1.ec.sx.cn, port: 2073, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇮🇳 印度02-IEPL-倍率1.0, server: cdn.in2.ec.sx.cn, port: 2074, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇹🇭 泰国01-IEPL-倍率1.0, server: cdn.th1.ec.sx.cn, port: 2103, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇹🇭 泰国02-IEPL-倍率1.0, server: cdn.th2.ec.sx.cn, port: 2104, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 蒙古01-IEPL-倍率1.0, server: cdn.mn1.ec.sx.cn, port: 2099, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 蒙古02-IEPL-倍率1.0, server: cdn.mn2.ec.sx.cn, port: 2100, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇻🇳 越南01-IEPL-倍率1.0, server: cdn.vn1.ec.sx.cn, port: 2075, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇻🇳 越南02-IEPL-倍率1.0, server: cdn.vn2.ec.sx.cn, port: 2076, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇮🇩 印尼01-IEPL-倍率1.0, server: cdn.id1.ec.sx.cn, port: 2101, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇮🇩 印尼02-IEPL-倍率1.0, server: cdn.id2.ec.sx.cn, port: 2102, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇳🇱 荷兰01-IEPL-倍率1.0, server: cdn.nl1.ec.sx.cn, port: 2077, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇳🇱 荷兰02-IEPL-倍率1.0, server: cdn.nl2.ec.sx.cn, port: 2078, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇬🇧 英国01-IEPL-倍率1.0, server: cdn.gb1.ec.sx.cn, port: 2081, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇬🇧 英国02-IEPL-倍率1.0, server: cdn.gb2.ec.sx.cn, port: 2082, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇩🇪 德国01-IEPL-倍率1.0, server: cdn.de1.ec.sx.cn, port: 2083, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇩🇪 德国02-IEPL-倍率1.0, server: cdn.de2.ec.sx.cn, port: 2084, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇫🇷 法国01-IEPL-倍率1.0, server: cdn.fr1.ec.sx.cn, port: 2091, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇫🇷 法国02-IEPL-倍率1.0, server: cdn.fr2.ec.sx.cn, port: 2092, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 波兰01-IEPL-倍率1.0, server: cdn.pl1.ec.sx.cn, port: 2095, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 波兰02-IEPL-倍率1.0, server: cdn.pl2.ec.sx.cn, port: 2096, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇦 加拿大01-IEPL-倍率1.0, server: cdn.ca1.ec.sx.cn, port: 2079, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇨🇦 加拿大02-IEPL-倍率1.0, server: cdn.ca2.ec.sx.cn, port: 2080, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇷🇺 俄罗斯01-IEPL-倍率1.0, server: cdn.ru1.ec.sx.cn, port: 2071, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇷🇺 俄罗斯02-IEPL-倍率1.0, server: cdn.ru2.ec.sx.cn, port: 2072, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇹🇷 土耳其01-IEPL-倍率1.0, server: cdn.tr1.ec.sx.cn, port: 2085, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇹🇷 土耳其02-IEPL-倍率1.0, server: cdn.tr2.ec.sx.cn, port: 2086, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇦🇷 阿根廷01-IEPL-倍率1.0, server: cdn.ar1.ec.sx.cn, port: 2093, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇦🇷 阿根廷02-IEPL-倍率1.0, server: cdn.ar2.ec.sx.cn, port: 2094, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇲🇾 马来西亚01-IEPL-倍率1.0, server: cdn.my1.ec.sx.cn, port: 2097, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇲🇾 马来西亚02-IEPL-倍率1.0, server: cdn.my2.ec.sx.cn, port: 2098, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 巴基斯坦01-IEPL-倍率1.0, server: cdn.pk1.ec.sx.cn, port: 2087, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 巴基斯坦02-IEPL-倍率1.0, server: cdn.pk2.ec.sx.cn, port: 2088, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇦🇺 澳大利亚01-IEPL-倍率1.0, server: cdn.au1.ec.sx.cn, port: 2089, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
+  - {name: 🇦🇺 澳大利亚02-IEPL-倍率1.0, server: cdn.au2.ec.sx.cn, port: 2090, type: ssr, cipher: chacha20-ietf, password: hzBuV5oT9t6GEx08, protocol: auth_aes128_md5, obfs: http_simple, protocol-param: 95094:ESI2a0FqdEbqBdMc, obfs-param: 407c895094.microsoft.com, udp: true}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
       - DIRECT
-      - 🇭🇰 香港 01
-      - 🇭🇰 香港 02
-      - 🇭🇰 香港 03
-      - 🇭🇰 香港 04
-      - 🇨🇳 台湾 01
-      - 🇨🇳 台湾 02
-      - 🇸🇬 狮城 01
-      - 🇸🇬 狮城 02
-      - 🇯🇵 日本 01
-      - 🇯🇵 日本 02
-      - 🇺🇲 美国 01
-      - 🇺🇲 美国 02
-      - 🇰🇷 韩国 01
-      - 🇰🇷 韩国 02
-      - 🇩🇪 德国 01
-      - 🇬🇧 英国 01
-      - 🇯🇵 日本 | 新疆专用
+      - 🇭🇰 香港01-IEPL-倍率1.0
+      - 🇭🇰 香港02-IEPL-倍率1.0
+      - 🇭🇰 香港03-IEPL-倍率1.0
+      - 🇭🇰 香港04-IEPL-倍率1.0
+      - 🇭🇰 香港05-IEPL-倍率1.0
+      - 🇭🇰 香港06-IEPL-倍率1.0
+      - 🇨🇳 台湾01-IEPL-倍率1.0
+      - 🇨🇳 台湾02-IEPL-倍率1.0
+      - 🇨🇳 台湾03-IEPL-倍率1.0
+      - 🇨🇳 台湾04-IEPL-倍率1.0
+      - 🇨🇳 台湾05-IEPL-倍率1.0
+      - 🇨🇳 台湾06-IEPL-倍率1.0
+      - 🇸🇬 新加坡01-IEPL-倍率1.0
+      - 🇸🇬 新加坡02-IEPL-倍率1.0
+      - 🇸🇬 新加坡03-IEPL-倍率1.0
+      - 🇸🇬 新加坡04-IEPL-倍率1.0
+      - 🇸🇬 新加坡05-IEPL-倍率1.0
+      - 🇸🇬 新加坡06-IEPL-倍率1.0
+      - 🇯🇵 日本01-IEPL-倍率1.0
+      - 🇯🇵 日本02-IEPL-倍率1.0
+      - 🇯🇵 日本03-IEPL-倍率1.0
+      - 🇯🇵 日本04-IEPL-倍率1.0
+      - 🇯🇵 日本05-IEPL-倍率1.0
+      - 🇯🇵 日本06-IEPL-倍率1.0
+      - 🇰🇷 韩国01-IEPL-倍率1.0
+      - 🇰🇷 韩国02-IEPL-倍率1.0
+      - 🇺🇲 美国01-IEPL-倍率1.0
+      - 🇺🇲 美国02-IEPL-倍率1.0
+      - 🇺🇲 美国03-IEPL-倍率1.0
+      - 🇺🇲 美国04-IEPL-倍率1.0
+      - 🇺🇲 美国05-IEPL-倍率1.0
+      - 🇺🇲 美国06-IEPL-倍率1.0
+      - 🇮🇳 印度01-IEPL-倍率1.0
+      - 🇮🇳 印度02-IEPL-倍率1.0
+      - 🇹🇭 泰国01-IEPL-倍率1.0
+      - 🇹🇭 泰国02-IEPL-倍率1.0
+      - 蒙古01-IEPL-倍率1.0
+      - 蒙古02-IEPL-倍率1.0
+      - 🇻🇳 越南01-IEPL-倍率1.0
+      - 🇻🇳 越南02-IEPL-倍率1.0
+      - 🇮🇩 印尼01-IEPL-倍率1.0
+      - 🇮🇩 印尼02-IEPL-倍率1.0
+      - 🇳🇱 荷兰01-IEPL-倍率1.0
+      - 🇳🇱 荷兰02-IEPL-倍率1.0
+      - 🇬🇧 英国01-IEPL-倍率1.0
+      - 🇬🇧 英国02-IEPL-倍率1.0
+      - 🇩🇪 德国01-IEPL-倍率1.0
+      - 🇩🇪 德国02-IEPL-倍率1.0
+      - 🇫🇷 法国01-IEPL-倍率1.0
+      - 🇫🇷 法国02-IEPL-倍率1.0
+      - 波兰01-IEPL-倍率1.0
+      - 波兰02-IEPL-倍率1.0
+      - 🇨🇦 加拿大01-IEPL-倍率1.0
+      - 🇨🇦 加拿大02-IEPL-倍率1.0
+      - 🇷🇺 俄罗斯01-IEPL-倍率1.0
+      - 🇷🇺 俄罗斯02-IEPL-倍率1.0
+      - 🇹🇷 土耳其01-IEPL-倍率1.0
+      - 🇹🇷 土耳其02-IEPL-倍率1.0
+      - 🇦🇷 阿根廷01-IEPL-倍率1.0
+      - 🇦🇷 阿根廷02-IEPL-倍率1.0
+      - 🇲🇾 马来西亚01-IEPL-倍率1.0
+      - 🇲🇾 马来西亚02-IEPL-倍率1.0
+      - 巴基斯坦01-IEPL-倍率1.0
+      - 巴基斯坦02-IEPL-倍率1.0
+      - 🇦🇺 澳大利亚01-IEPL-倍率1.0
+      - 🇦🇺 澳大利亚02-IEPL-倍率1.0
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -78,36 +157,85 @@ proxy-groups:
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-      - 🇭🇰 香港 01
-      - 🇭🇰 香港 02
-      - 🇭🇰 香港 03
-      - 🇭🇰 香港 04
-      - 🇨🇳 台湾 01
-      - 🇨🇳 台湾 02
-      - 🇸🇬 狮城 01
-      - 🇸🇬 狮城 02
-      - 🇯🇵 日本 01
-      - 🇯🇵 日本 02
-      - 🇺🇲 美国 01
-      - 🇺🇲 美国 02
-      - 🇰🇷 韩国 01
-      - 🇰🇷 韩国 02
-      - 🇩🇪 德国 01
-      - 🇬🇧 英国 01
-      - 🇯🇵 日本 | 新疆专用
+      - 🇭🇰 香港01-IEPL-倍率1.0
+      - 🇭🇰 香港02-IEPL-倍率1.0
+      - 🇭🇰 香港03-IEPL-倍率1.0
+      - 🇭🇰 香港04-IEPL-倍率1.0
+      - 🇭🇰 香港05-IEPL-倍率1.0
+      - 🇭🇰 香港06-IEPL-倍率1.0
+      - 🇨🇳 台湾01-IEPL-倍率1.0
+      - 🇨🇳 台湾02-IEPL-倍率1.0
+      - 🇨🇳 台湾03-IEPL-倍率1.0
+      - 🇨🇳 台湾04-IEPL-倍率1.0
+      - 🇨🇳 台湾05-IEPL-倍率1.0
+      - 🇨🇳 台湾06-IEPL-倍率1.0
+      - 🇸🇬 新加坡01-IEPL-倍率1.0
+      - 🇸🇬 新加坡02-IEPL-倍率1.0
+      - 🇸🇬 新加坡03-IEPL-倍率1.0
+      - 🇸🇬 新加坡04-IEPL-倍率1.0
+      - 🇸🇬 新加坡05-IEPL-倍率1.0
+      - 🇸🇬 新加坡06-IEPL-倍率1.0
+      - 🇯🇵 日本01-IEPL-倍率1.0
+      - 🇯🇵 日本02-IEPL-倍率1.0
+      - 🇯🇵 日本03-IEPL-倍率1.0
+      - 🇯🇵 日本04-IEPL-倍率1.0
+      - 🇯🇵 日本05-IEPL-倍率1.0
+      - 🇯🇵 日本06-IEPL-倍率1.0
+      - 🇰🇷 韩国01-IEPL-倍率1.0
+      - 🇰🇷 韩国02-IEPL-倍率1.0
+      - 🇺🇲 美国01-IEPL-倍率1.0
+      - 🇺🇲 美国02-IEPL-倍率1.0
+      - 🇺🇲 美国03-IEPL-倍率1.0
+      - 🇺🇲 美国04-IEPL-倍率1.0
+      - 🇺🇲 美国05-IEPL-倍率1.0
+      - 🇺🇲 美国06-IEPL-倍率1.0
+      - 🇮🇳 印度01-IEPL-倍率1.0
+      - 🇮🇳 印度02-IEPL-倍率1.0
+      - 🇹🇭 泰国01-IEPL-倍率1.0
+      - 🇹🇭 泰国02-IEPL-倍率1.0
+      - 蒙古01-IEPL-倍率1.0
+      - 蒙古02-IEPL-倍率1.0
+      - 🇻🇳 越南01-IEPL-倍率1.0
+      - 🇻🇳 越南02-IEPL-倍率1.0
+      - 🇮🇩 印尼01-IEPL-倍率1.0
+      - 🇮🇩 印尼02-IEPL-倍率1.0
+      - 🇳🇱 荷兰01-IEPL-倍率1.0
+      - 🇳🇱 荷兰02-IEPL-倍率1.0
+      - 🇬🇧 英国01-IEPL-倍率1.0
+      - 🇬🇧 英国02-IEPL-倍率1.0
+      - 🇩🇪 德国01-IEPL-倍率1.0
+      - 🇩🇪 德国02-IEPL-倍率1.0
+      - 🇫🇷 法国01-IEPL-倍率1.0
+      - 🇫🇷 法国02-IEPL-倍率1.0
+      - 波兰01-IEPL-倍率1.0
+      - 波兰02-IEPL-倍率1.0
+      - 🇨🇦 加拿大01-IEPL-倍率1.0
+      - 🇨🇦 加拿大02-IEPL-倍率1.0
+      - 🇷🇺 俄罗斯01-IEPL-倍率1.0
+      - 🇷🇺 俄罗斯02-IEPL-倍率1.0
+      - 🇹🇷 土耳其01-IEPL-倍率1.0
+      - 🇹🇷 土耳其02-IEPL-倍率1.0
+      - 🇦🇷 阿根廷01-IEPL-倍率1.0
+      - 🇦🇷 阿根廷02-IEPL-倍率1.0
+      - 🇲🇾 马来西亚01-IEPL-倍率1.0
+      - 🇲🇾 马来西亚02-IEPL-倍率1.0
+      - 巴基斯坦01-IEPL-倍率1.0
+      - 巴基斯坦02-IEPL-倍率1.0
+      - 🇦🇺 澳大利亚01-IEPL-倍率1.0
+      - 🇦🇺 澳大利亚02-IEPL-倍率1.0
 rules:
   - DOMAIN-SUFFIX,cn,🎯 全球直连
   - DOMAIN-KEYWORD,icloud,🎯 全球直连
+  - DOMAIN-KEYWORD,steamcdn,🎯 全球直连
   - DOMAIN-SUFFIX,steamserver.net,🎯 全球直连
-  - DOMAIN-SUFFIX,steamstatic.com,🎯 全球直连
+  - DOMAIN-SUFFIX,apple.com,🎯 全球直连
   - DOMAIN-SUFFIX,tearemix.com,🎯 全球直连
-  - DOMAIN-SUFFIX,mechrevo.com,🎯 全球直连
-  - DOMAIN-SUFFIX,chaoxing.com,🎯 全球直连
   - DOMAIN-SUFFIX,steamzg.com,🎯 全球直连
-  - DOMAIN-SUFFIX,qq.com,🎯 全球直连
-  - DOMAIN-SUFFIX,microsoft.com,🎯 全球直连
+  - DOMAIN-SUFFIX,deepseek.com,🎯 全球直连
+  - DOMAIN-KEYWORD,microsoft,🚀 节点选择
 
   - GEOIP,lan,🎯 全球直连,no-resolve
   - GEOSITE,gfw,🚀 节点选择
   - GEOIP,cn,🎯 全球直连
   - MATCH,🐟 漏网之鱼
+  
