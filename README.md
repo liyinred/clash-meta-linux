@@ -1,124 +1,192 @@
-<div align="center">
-   <h1>自用clash规则,cn域名和特定网站直连(黑名单模式)</h1>
-</div>
+# Linux 安装 Clash 内核并开启透明代理
 
-**目前 Clash 支持的规则类型如下：**
+## 下载 Clash [​](#下载-clash)
 
-- DOMAIN-SUFFIX：域名后缀匹配
-- DOMAIN：域名匹配
-- DOMAIN-KEYWORD：域名关键字匹配
-- IP-CIDR：IP 段匹配
-- SRC-IP-CIDR：源 IP 段匹配
-- GEOIP：GEOIP 数据库（国家代码）匹配
-- DST-PORT：目标端口匹配
-- SRC-PORT：源端口匹配
-- PROCESS-NAME：源进程名匹配
-- RULE-SET：Rule Provider 规则匹配
-- MATCH：全匹配
+### Clash 内核 [​](#clash-内核)
+
+1.  Clash 内核分为 [开源版](https://github.com/Dreamacro/clash/releases) / [Premium 版](https://github.com/Dreamacro/clash/releases/tag/premium)(已删库) / [Meta 版(mihomo)](https://github.com/MetaCubeX/mihomo/releases) ，可以根据需求自行选择版本
+2.  在 release 中下载对应系统的内核解压后，重命名为 `clash` 上传至 `/opt/clash`
+3.  执行 `chmod +x /opt/clash/clash` 添加运行权限
+
+```sh
+mkdir -p /opt/clash && cd /opt/clash && \
+wget -O mihomo.gz https://github.com/MetaCubeX/mihomo/releases/latest/download/mihomo-linux-amd64-compatible-v1.19.10.gz && \
+gunzip mihomo.gz && chmod +x mihomo
+```
+
+### Country.mmdb [​](#country-mmdb)
+
+在 [maxmind-geoip](https://github.com/Dreamacro/maxmind-geoip/releases) 中下载全球 IP 库 Country.mmdb 文件上传至 `/opt/clash`
+
+```sh
+wget -O /opt/clash/Country.mmdb https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb
+```
+
+### 控制面板 [​](#控制面板)
+
+在 [metacubexd](https://github.com/MetaCubeX/metacubexd/releases) 中下载面板文件上传至 `/opt/clash/ui`
+
+```sh
+mkdir -p /opt/clash/ui && cd /opt/clash/ui && \
+wget https://github.com/MetaCubeX/metacubexd/releases/latest/download/compressed-dist.tgz && \
+tar -xzf compressed-dist.tgz && rm compressed-dist.tgz
+```
+
+### config.yaml [​](#config-yaml)
+
+- 将配置文件命名为 `config.yaml` 上传至 `/opt/clash`
+
+```sh
+wget -O /opt/clash/config.yaml https://domain.com/clash.yaml
+```
+
+- 在配置文件中，除了常规的节点规则配置以外，确保包含**外部控制**配置
 
 ```yaml
-- DOMAIN-KEYWORD,dwai,🎯 全球直连
-- DOMAIN-KEYWORD,cn,🎯 全球直连
-
-
-regexp:.*.cn.*,
-regexp:.*hunau.*,
-regexp:.*baidu.*,
-regexp:.*delivery.mp.microsoft.*,
-regexp:.*163.*,
-regexp:.*chaoxing.*,
-regexp:.*bing.*,
-regexp:.*steamserver.*,
-regexp:.*steamstatic.*,
-regexp:.*dwai.life.*,
-regexp:.*tearemix.*,
-
-
-keyword:baidu,
-keyword:cn,
-keyword:hunau,
-keyword:baidu,
-keyword:delivery.mp.microsoft,
-keyword:163,
-keyword:chaoxing,
-keyword:bing,
-keyword:steamserver,
-keyword:steamstatic,
-keyword:dwai.life,
-keyword:tearemix,
-
-
-
+external-controller: 0.0.0.0:9090
+external-ui: /opt/clash/ui
+secret: ""
 ```
 
+## 创建 systemd 配置文件 [​](#创建-systemd-配置文件)
 
-**正则表达式原理：**
+1.  创建 systemd 配置文件
 
-1. **普通字符匹配**：正则表达式中的普通字符，比如字母和数字，会直接匹配字符串中的相应字符。
+/etc/systemd/system/clash.service
 
-2. **元字符使用**：特殊字符或元字符，如 `.`、`*`、`?`、`+`、`^`、`$`、`[]`、`()`、`|` 等，在正则表达式中具有特殊意义，它们可以指定更复杂的匹配模式，如匹配任意字符、重复字符、可选字符等。
+```ini
+[Unit]
+Description=Clash 守护进程, Go 语言实现的基于规则的代理.
+After=network.target NetworkManager.service systemd-networkd.service iwd.service
 
-3. **模式组合**：通过组合上述普通字符和元字符，可以创建非常复杂的匹配模式，以识别特定的字符串模式，例如URL。
+[Service]
+Type=simple
+LimitNPROC=500
+LimitNOFILE=1000000
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME
+Restart=always
+ExecStartPre=/usr/bin/sleep 1s
+ExecStart=/opt/clash/mihomo -d /opt/clash
+ExecReload=/bin/kill -HUP $MAINPID
 
-**匹配URL的正则表达式原理：**
-
-- **起始和结束**：通常正则表达式以 `^` 开始表示行的起始，以 `$` 结束表示行的结束，确保整个字符串匹配URL格式。
-- **协议**：使用 `(https?|ftp)` 等来匹配URL的协议部分，其中 `?` 表示前面的字符是可选的，匹配http或https。
-- **域名**：使用 `[a-zA-Z0-9.-]` 来匹配域名中的合法字符，包括字母、数字、点和连字符。
-- **端口**：使用 `(:\d{1,5})?` 来匹配端口号，`?` 表示端口是可选的。
-- **路径、查询和片段**：使用 `(/[\w/:%#\$&\?\(\)~\.=\+\-]*)?` 等来匹配URL的路径、查询参数和片段。
-
-**关键词匹配原理：**
-
-关键词匹配通常是指在文本中搜索指定的单词或短语。这种匹配通常不使用正则表达式那样复杂的模式，而是简单的字符串查找。
-
-- **完全匹配**：关键词通常要求完全匹配，即文本中的单词必须与搜索词完全一致。
-- **大小写敏感**：关键词匹配可能区分大小写，也可能不区分，这取决于具体的搜索工具或函数设置。
-
-
-
-## 谷歌搜索指令
-
-- **精确搜索**: `"气候变化"`
-  - 使用例子：搜索包含完整短语“气候变化”的页面。
-- **排除词语**: `苹果 -电脑`
-  - 使用例子：搜索与“苹果”有关，但不包含“电脑”的页面。
-- **站点特定搜索**: `site:nytimes.com`
-  - 使用例子：只显示来自纽约时报网站的搜索结果。
-- **相关网站搜索**: `related:google.com`
-  - 使用例子：查找与谷歌有类似内容的其他网站。
-- **文件类型搜索**: `filetype:pdf`
-  - 使用例子：查找PDF格式的文件。
-- **数值范围搜索**: `电视 1000..2000元`
-  - 使用例子：搜索价格在1000至2000元之间的电视。
-- **定义搜索**: `define:哲学`
-  - 使用例子：快速得到“哲学”的定义。
-- **缓存搜索**: `cache:google.com`
-  - 使用例子：显示谷歌网站的缓存版本。
-- **全文搜索图书**: `intitle:全球变暖`
-  - 使用例子：返回标题中含有“全球变暖”的网页。
-- **通配符搜索**: `"成语 * 不到"`
-  - 使用例子：搜索所有以“成语”开始并以“不到”结束的短语。
-- **特定位置搜索**: `intext:环保`
-  - 使用例子：找到所有正文中包含“环保”的页面。
-- **搜索历史版本**: `inurl:forum 天文`
-  - 使用例子：帮助你找到包含论坛讨论天文的页面。
-- **搜索标题和网页正文**: `allintitle:气候 变化`
-  - 使用例子：只显示标题中同时包含“气候”和“变化”的页面。
-- **搜索锚文本**: `inanchor:"点击这里" 环保`
-  - 使用例子：找到所有锚文本为“点击这里”且内容涉及环保的页面。
-- **特定语言和地区搜索**: `lr:lang_ja` 和 `cr:countryJP`
-  - 使用例子：分别搜索日语内容和来自日本的网页。
-- **日期范围搜索**: `daterange:2458119-2458130`
-  - 使用例子：搜索指定Julian日期范围内发布的页面。
-- **搜索转换后的结果**: `convert: 10 miles to km`
-  - 使用例子：将10英里转换成公里。
-- **逻辑运算符**: `solar OR lunar`
-  - 使用例子：搜索含有“solar”（太阳的）或“lunar”（月亮的）的页面。
-
-```bash
-ipconfig /flushdns
-
-https://cf.trackerslist.com/best.txt
+[Install]
+WantedBy=multi-user.target
 ```
-[MYSQL安装 Manual](https://blog.csdn.net/weixin_47406082/article/details/131867849?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171660092916800197070475%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=171660092916800197070475&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-131867849-null-null.142^v100^pc_search_result_base5&utm_term=mysql%E5%AE%89%E8%A3%85&spm=1018.2226.3001.4187)
+
+2.  重新加载 systemd
+
+```sh
+systemctl daemon-reload
+```
+
+3.  接下来就可以通过 systemctl 控制 Clash 启动与停止
+
+```sh
+systemctl status clash # 运行状态
+systemctl start clash # 启动
+systemctl stop clash # 停止
+systemctl enable clash # 开机自启
+systemctl disable clash # 取消开机自启
+```
+
+4.  查看日志可以通过 `journalctl`
+
+```sh
+journalctl -u clash --reverse
+```
+
+## 系统代理 [​](#系统代理)
+
+1.  创建并编辑 `.bashrc`
+
+2.  将以下代码写入其中
+
+```sh
+export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
+export all_proxy="socks5://127.0.0.1:7890"
+export no_proxy="localhost,127.*,10.*,172.16.*,172.17.*,172.18.*,172.19.*,172.20.*,172.21.*,172.22.*,172.23.*,172.24.*,172.25.*,172.26.*,172.27.*,172.28.*,172.29.*,172.30.*,172.31.*,192.168.*"
+```
+
+## TUN 模式 [​](#tun-模式)
+
+### 开启流量转发 [​](#开启流量转发)
+
+1.  编辑 `/etc/sysctl.conf` 文件
+
+2.  将以下代码取消注释
+
+```txt
+net.ipv4.ip_forward=1
+net.ipv6.conf.all.forwarding=1
+```
+
+3.  加载内核参数
+
+### 开启 dns [​](#开启-dns)
+
+提示
+
+2025 年 3 月之后，海外 DoH / DoT 都被屏蔽了
+
+如需使用，要通过 `https://8.8.8.8/dns-query#proxy` 这样的形式或启用 fake-ip
+
+如不使用 DoH / DoT 则不受影响，正常使用 `8.8.8.8` 这种形式即可
+
+1.  53 端口可能被占用，关闭默认的系统 dns 端口
+
+```sh
+systemctl disable systemd-resolved
+```
+
+2.  在 Clash 配置文件中添加 dns
+
+```yaml
+dns:
+  enable: true
+  prefer-h3: true
+  ipv6: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - controlplane.tailscale.com
+    - log.tailscale.io
+  nameserver:
+    - https://223.5.5.5/dns-query#h3=true
+    - https://223.6.6.6/dns-query#h3=true
+    - tls://223.5.5.5
+    - tls://223.6.6.6
+  fallback:
+    - https://8.8.8.8/dns-query
+    - https://8.8.4.4/dns-query
+    - https://1.1.1.1/dns-query
+    - https://1.0.0.1/dns-query
+    - tls://8.8.8.8
+    - tls://8.8.4.4
+    - tls://1.1.1.1
+    - tls://1.0.0.1
+```
+
+### 开启 TUN [​](#开启-tun)
+
+提示
+
+如果将设备作为**旁路网关**，需要将网关和 DNS 都指向该设备，并且关闭**终端设备**的 IPv6（Android 需要 Root）
+
+否则 IPv6 流量可能不会经过指定的 IPv4 网关，更多问题建议参考 [ShellCrash 的常见问题](https://juewuy.github.io/chang-jian-wen-ti/#%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98)解决
+
+在 Clash 配置文件中添加 TUN
+
+```yaml
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+```
