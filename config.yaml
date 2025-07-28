@@ -2,7 +2,6 @@ mixed-port: 7890
 # port: 7890
 # socks-port: 7891
 allow-lan: true
-geodata-mode: true
 mode: rule
 log-level: info
 unified-delay: true
@@ -11,143 +10,207 @@ external-controller: 0.0.0.0:9090
 # external-ui: /home/wli/clash-meta/ui
 external-ui: ./metacubexd_ui
 secret: "abc123456"
-tun:
-  enable: false
-  stack: mixed
-  auto-route: true
-  strict-route: false
-  auto-detect-interface: true
-  dns-hijack:
-  - any:53
+tcp-concurrent: true
+profile:
+  store-selected: true
+geodata-mode: true
 dns:
   enable: true
   nameserver:
   - 223.5.5.5
   - 8.8.8.8
   ipv6: false
-profile:
-  store-selected: true
+tun:
+  auto-detect-interface: true
+  auto-route: true
+  device: Mihomo
+  dns-hijack:
+  - any:53
+  mtu: 1500
+  stack: mixed
+  strict-route: false
+  enable: false
 proxies:
-- name: 香港 01 | 0.1x
+- name: 🇭🇰 香港 DC | 0.1x
+  server: YSHK-1c6cd66c49c80e43.elb.ap-east-1.amazonaws.com
+  port: 443
+  type: vmess
+  uuid: dbd27515-74a6-4e79-99b0-3233003a7c72
+  alterId: 0
+  cipher: auto
+  tls: true
+  servername: gov.lsyx.asia
+  network: ws
+  ws-opts:
+    path: /cache
+    headers:
+      Host: gov.lsyx.asia
+  udp: true
+- name: 🇨🇳 台湾 DC | 0.1x
+  server: 43.213.57.214
+  port: 443
+  type: vmess
+  uuid: dbd27515-74a6-4e79-99b0-3233003a7c72
+  alterId: 0
+  cipher: auto
+  tls: true
+  servername: gov.lsyx.asia
+  network: ws
+  ws-opts:
+    path: /cache
+    headers:
+      Host: gov.lsyx.asia
+  udp: true
+- name: 🇸🇬 狮城 DC | 0.1x
+  server: yssg-968eec2daecf9cd0.elb.ap-southeast-1.amazonaws.com
+  port: 443
+  type: vmess
+  uuid: dbd27515-74a6-4e79-99b0-3233003a7c72
+  alterId: 0
+  cipher: auto
+  tls: true
+  servername: gov.lsyx.asia
+  network: ws
+  ws-opts:
+    path: /cache
+    headers:
+      Host: gov.lsyx.asia
+  udp: true
+- name: 🇯🇵 日本 DC | 0.1x
+  server: ysjp-d63f69c1c5d2ef0d.elb.ap-northeast-1.amazonaws.com
+  port: 443
+  type: vmess
+  uuid: dbd27515-74a6-4e79-99b0-3233003a7c72
+  alterId: 0
+  cipher: auto
+  tls: true
+  servername: gov.lsyx.asia
+  network: ws
+  ws-opts:
+    path: /cache
+    headers:
+      Host: gov.lsyx.asia
+  udp: true
+- name: 🇭🇰 香港 01 | 0.1x
   server: welfare.yushe-node.top
   port: 30001
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 香港 02 | 0.1x
+- name: 🇭🇰 香港 02 | 0.1x
   server: welfare.yushe-node.top
   port: 30002
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 香港 01
+- name: 🇭🇰 香港 01
   server: china1.cdn.yushe-node.top
   port: 30001
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 香港 02
+- name: 🇭🇰 香港 02
   server: china1.cdn.yushe-node.top
   port: 30002
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 香港 03
+- name: 🇭🇰 香港 03
   server: china1-2.cdn.yushe-node.top
   port: 30003
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 香港 04
+- name: 🇭🇰 香港 04
   server: china1-2.cdn.yushe-node.top
   port: 30004
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 台湾 01
+- name: 🇨🇳 台湾 01
   server: china1.cdn.yushe-node.top
   port: 30011
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 台湾 02
+- name: 🇨🇳 台湾 02
   server: china1.cdn.yushe-node.top
   port: 30012
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 狮城 01
+- name: 🇸🇬 狮城 01
   server: china2.cdn.yushe-node.top
   port: 30021
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 狮城 02
+- name: 🇸🇬 狮城 02
   server: china2.cdn.yushe-node.top
   port: 30022
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 日本 01
+- name: 🇯🇵 日本 01
   server: china3.cdn.yushe-node.top
   port: 30031
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 日本 02
+- name: 🇯🇵 日本 02
   server: china3.cdn.yushe-node.top
   port: 30032
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 美国 01
+- name: 🇺🇸 美国 01
   server: china3.cdn.yushe-node.top
   port: 30041
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 美国 02
+- name: 🇺🇸 美国 02
   server: china3.cdn.yushe-node.top
   port: 30042
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 韩国 01
+- name: 🇰🇷 韩国 01
   server: china4.cdn.yushe-node.top
   port: 30051
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 泰国 01
+- name: 🇹🇭 泰国 01
   server: china4.cdn.yushe-node.top
   port: 30052
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 德国 01
+- name: 🇩🇪 德国 01
   server: china4.cdn.yushe-node.top
   port: 30061
   type: ss
   cipher: aes-128-gcm
   password: dbd27515-74a6-4e79-99b0-3233003a7c72
   udp: true
-- name: 英国 01
+- name: 🇬🇧 英国 01
   server: china4.cdn.yushe-node.top
   port: 30062
   type: ss
@@ -160,48 +223,56 @@ proxy-groups:
   proxies:
   - ♻️ 自动选择
   - DIRECT
-  - 香港 01 | 0.1x
-  - 香港 02 | 0.1x
-  - 香港 01
-  - 香港 02
-  - 香港 03
-  - 香港 04
-  - 台湾 01
-  - 台湾 02
-  - 狮城 01
-  - 狮城 02
-  - 日本 01
-  - 日本 02
-  - 美国 01
-  - 美国 02
-  - 韩国 01
-  - 泰国 01
-  - 德国 01
-  - 英国 01
+  - 🇭🇰 香港 DC | 0.1x
+  - 🇨🇳 台湾 DC | 0.1x
+  - 🇸🇬 狮城 DC | 0.1x
+  - 🇯🇵 日本 DC | 0.1x
+  - 🇭🇰 香港 01 | 0.1x
+  - 🇭🇰 香港 02 | 0.1x
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 02
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇨🇳 台湾 01
+  - 🇨🇳 台湾 02
+  - 🇸🇬 狮城 01
+  - 🇸🇬 狮城 02
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇰🇷 韩国 01
+  - 🇹🇭 泰国 01
+  - 🇩🇪 德国 01
+  - 🇬🇧 英国 01
 - name: ♻️ 自动选择
   type: url-test
   url: http://www.gstatic.com/generate_204
-  interval: 300
+  interval: 30
   tolerance: 50
   proxies:
-  - 香港 01 | 0.1x
-  - 香港 02 | 0.1x
-  - 香港 01
-  - 香港 02
-  - 香港 03
-  - 香港 04
-  - 台湾 01
-  - 台湾 02
-  - 狮城 01
-  - 狮城 02
-  - 日本 01
-  - 日本 02
-  - 美国 01
-  - 美国 02
-  - 韩国 01
-  - 泰国 01
-  - 德国 01
-  - 英国 01
+  - 🇭🇰 香港 DC | 0.1x
+  - 🇨🇳 台湾 DC | 0.1x
+  - 🇸🇬 狮城 DC | 0.1x
+  - 🇯🇵 日本 DC | 0.1x
+  - 🇭🇰 香港 01 | 0.1x
+  - 🇭🇰 香港 02 | 0.1x
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 02
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇨🇳 台湾 01
+  - 🇨🇳 台湾 02
+  - 🇸🇬 狮城 01
+  - 🇸🇬 狮城 02
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇰🇷 韩国 01
+  - 🇹🇭 泰国 01
+  - 🇩🇪 德国 01
+  - 🇬🇧 英国 01
 - name: 🎯 全球直连
   type: select
   proxies:
@@ -219,44 +290,42 @@ proxy-groups:
   - 🚀 节点选择
   - 🎯 全球直连
   - ♻️ 自动选择
-  - 香港 01 | 0.1x
-  - 香港 02 | 0.1x
-  - 香港 01
-  - 香港 02
-  - 香港 03
-  - 香港 04
-  - 台湾 01
-  - 台湾 02
-  - 狮城 01
-  - 狮城 02
-  - 日本 01
-  - 日本 02
-  - 美国 01
-  - 美国 02
-  - 韩国 01
-  - 泰国 01
-  - 德国 01
-  - 英国 01
+  - 🇭🇰 香港 DC | 0.1x
+  - 🇨🇳 台湾 DC | 0.1x
+  - 🇸🇬 狮城 DC | 0.1x
+  - 🇯🇵 日本 DC | 0.1x
+  - 🇭🇰 香港 01 | 0.1x
+  - 🇭🇰 香港 02 | 0.1x
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 02
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇨🇳 台湾 01
+  - 🇨🇳 台湾 02
+  - 🇸🇬 狮城 01
+  - 🇸🇬 狮城 02
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇰🇷 韩国 01
+  - 🇹🇭 泰国 01
+  - 🇩🇪 德国 01
+  - 🇬🇧 英国 01
 rules:
-
-  - DOMAIN-SUFFIX,bing.com,REJECT
-  - DOMAIN-SUFFIX,baidu.com,REJECT
-  
-  - GEOIP,private,🎯 全球直连
-  - DOMAIN-SUFFIX,cn,🎯 全球直连
-  - DOMAIN-KEYWORD,steamcdn,🎯 全球直连
-  - DOMAIN-SUFFIX,steamserver.net,🎯 全球直连
-  - DOMAIN-SUFFIX,apple.com,🎯 全球直连
-  - DOMAIN-SUFFIX,ifconfig.co,🎯 全球直连
-  - DOMAIN-SUFFIX,sorryios.ai,🎯 全球直连
-  - DOMAIN-SUFFIX,gofile.io,🎯 全球直连
-
-  - DOMAIN-KEYWORD,microsoft,🚀 节点选择
-  - DOMAIN-SUFFIX,google.com,🚀 节点选择
-  - DOMAIN-SUFFIX,youtube.com,🚀 节点选择
-  - DOMAIN-SUFFIX,github.com,🚀 节点选择
-  - DOMAIN-SUFFIX,futunn.com,🚀 节点选择
-  - GEOSITE,gfw,🚀 节点选择
-
-  - GEOIP,cn,🎯 全球直连
-  - MATCH,🚀 节点选择
+- GEOIP,private,🎯 全球直连
+- DOMAIN-SUFFIX,cn,🎯 全球直连
+- DOMAIN-KEYWORD,steamcdn,🎯 全球直连
+- DOMAIN-SUFFIX,steamserver.net,🎯 全球直连
+- DOMAIN-SUFFIX,apple.com,🎯 全球直连
+- DOMAIN-SUFFIX,ifconfig.co,🎯 全球直连
+- DOMAIN-SUFFIX,sorryios.ai,🎯 全球直连
+- DOMAIN-SUFFIX,gofile.io,🎯 全球直连
+- DOMAIN-KEYWORD,microsoft,🚀 节点选择
+- DOMAIN-SUFFIX,google.com,🚀 节点选择
+- DOMAIN-SUFFIX,youtube.com,🚀 节点选择
+- DOMAIN-SUFFIX,github.com,🚀 节点选择
+- DOMAIN-SUFFIX,futunn.com,🚀 节点选择
+- GEOSITE,gfw,🚀 节点选择
+- GEOIP,cn,🎯 全球直连
+- MATCH,🚀 节点选择
