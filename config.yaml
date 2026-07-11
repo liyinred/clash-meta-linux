@@ -1,5 +1,6 @@
 mode: rule
 mixed-port: 7890
+bind-address: '*'
 allow-lan: false
 log-level: info
 ipv6: false
@@ -9,6 +10,8 @@ secret: "abc123456"
 unified-delay: true
 tcp-concurrent: false
 geodata-mode: false
+profile:
+  store-selected: true
 tun:
   auto-detect-interface: true
   auto-route: true
@@ -20,28 +23,48 @@ tun:
   - 192.168.0.0/16
   - 127.0.0.0/8
   - 10.0.0.0/8
+  - 172.16.0.0/12
   stack: mixed
   strict-route: false
   enable: true
-profile:
-  store-selected: true
-bind-address: '*'
-external-controller-pipe: \\.\pipe\verge-mihomo
-external-controller-cors:
-  allow-private-network: true
-  allow-origins:
-  - tauri://localhost
-  - http://tauri.localhost
-  - https://yacd.metacubex.one
-  - https://metacubex.github.io
-  - https://board.zash.run.place
 dns:
   enable: true
   ipv6: false
   nameserver:
-  - https://dns.alidns.com/dns-query
-  - https://doh.pub/dns-query
+  - 223.5.5.5
+  - 119.29.29.29
+
 proxies:
+- name: 🇯🇵 日本高速01|CTCU|0.5x
+  server: cfyes.lxy1015.top
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  skip-cert-verify: false
+  servername: jp-lx.777076.xyz
+  client-fingerprint: safari
+  network: ws
+  ws-opts:
+    path: /liangxin/jp1
+    headers:
+      Host: jp-lx.777076.xyz
+  udp: true
+- name: 🇯🇵 日本高速02|CTCU|0.5x
+  server: cfyes.lxy1015.top
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  skip-cert-verify: false
+  servername: jp2-lx.777076.xyz
+  client-fingerprint: safari
+  network: ws
+  ws-opts:
+    path: /liangxin/jp1
+    headers:
+      Host: jp2-lx.777076.xyz
+  udp: true
 - name: 🇸🇬 新加坡高速01|BGP|CTCUCM
   server: aws-link7.liangxin1.xyz
   port: 48574
@@ -157,6 +180,136 @@ proxies:
     headers:
       Host: lx-1sg.lxy1015.top
   udp: true
+- name: 🇯🇵 日本高速01|BGP|CUCM
+  server: aws-link13.liangxin1.xyz
+  port: 36574
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  flow: xtls-rprx-vision
+  skip-cert-verify: false
+  servername: www.apple.com.cn
+  client-fingerprint: safari
+  reality-opts:
+    public-key: sDG-KQk1BF7V83-xnmrWDouXxpPd_ZSxKcHrJJzbols
+    short-id: 32a3650d
+  udp: true
+- name: 🇯🇵 日本高速02|BGP|CUCM
+  server: aws-link14.liangxin1.xyz
+  port: 25485
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  flow: xtls-rprx-vision
+  skip-cert-verify: false
+  servername: www.apple.com.cn
+  client-fingerprint: ios
+  reality-opts:
+    public-key: VOFSjjWT0wIH3Q0ntyEZd8WwksrIAb5gPt_3PBnEASg
+    short-id: 9c5b8c53
+  udp: true
+- name: 🇯🇵 日本高速03|BGP|CUCM
+  server: aws-link19.liangxin1.xyz
+  port: 8654
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  flow: xtls-rprx-vision
+  skip-cert-verify: false
+  servername: download-porter.hoyoverse.com
+  client-fingerprint: safari
+  reality-opts:
+    public-key: QE5l0RUqs4OsH3j3u_xHm06-4NlILmQivZUJqiEx11o
+    short-id: 6314e825
+  udp: true
+- name: 🇯🇵 日本高速04|BGP|CUCM
+  server: aws-link20.liangxin1.xyz
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  flow: xtls-rprx-vision
+  skip-cert-verify: false
+  servername: download-porter.hoyoverse.com
+  client-fingerprint: ios
+  reality-opts:
+    public-key: QE5l0RUqs4OsH3j3u_xHm06-4NlILmQivZUJqiEx11o
+    short-id: 6314e825
+  udp: true
+- name: 🇯🇵 日本高速05|BGP|CUCM
+  server: aws-link23.liangxin1.xyz
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  flow: xtls-rprx-vision
+  skip-cert-verify: false
+  servername: download-porter.hoyoverse.com
+  client-fingerprint: safari
+  reality-opts:
+    public-key: dLmUAqcdy4Z7iucApd9zjOhkXTjl-xt_eHumShIYW0c
+    short-id: ba826a54
+  udp: true
+- name: 🇯🇵 日本高速06|BGP|CTCU
+  server: cfyes.lxy1015.top
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  skip-cert-verify: false
+  servername: lxs1jp.lxy1015.top
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /liangxin/jp1
+    headers:
+      Host: lx-1jp.lxy1015.top
+  udp: true
+- name: 🇯🇵 日本高速07|BGP|CTCU
+  server: cfyes.lxy1015.top
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  skip-cert-verify: false
+  servername: lxs1jp.lxy1015.top
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /liangxin/jp1
+    headers:
+      Host: lx-1jp.lxy1015.top
+  udp: true
+- name: 🇯🇵 日本高速08|BGP|CTCU
+  server: cfyes.lxy1015.top
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  skip-cert-verify: false
+  servername: lxs2jp.lxy1015.top
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /liangxin/jp1
+    headers:
+      Host: lx-2jp.lxy1015.top
+  udp: true
+- name: 🇯🇵 日本高速09|BGP|CTCU
+  server: cfyes.lxy1015.top
+  port: 443
+  type: vless
+  uuid: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  tls: true
+  skip-cert-verify: false
+  servername: lxs2jp.lxy1015.top
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /liangxin/jp1
+    headers:
+      Host: lx-2jp.lxy1015.top
+  udp: true
 - name: 🇺🇸 美国高速01|CTCU
   server: cfyes.lxy1015.top
   port: 443
@@ -248,6 +401,38 @@ proxies:
   password: 028f9652-beca-44d0-83b2-337bd3dc9fce
   sni: iosapps.itunes.apple.com
   skip-cert-verify: true
+- name: 🇯🇵 日本专线01|BGP|流媒体
+  server: aws-linkhy15.liangxin1.xyz
+  port: 60000
+  type: hysteria2
+  ports: 60000-65530
+  password: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  sni: bilibili-jp.biliimg.com
+  skip-cert-verify: true
+- name: 🇯🇵 日本专线02|BGP|流媒体
+  server: aws-linkhy16.liangxin1.xyz
+  port: 60000
+  type: hysteria2
+  ports: 60000-65530
+  password: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  sni: bilibili-jp2.biliimg.com
+  skip-cert-verify: true
+- name: 🇯🇵 日本专线03|BGP|流媒体
+  server: aws-linkhy17.liangxin1.xyz
+  port: 60000
+  type: hysteria2
+  ports: 60000-65530
+  password: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  sni: bilibili-jp3.biliimg.com
+  skip-cert-verify: true
+- name: 🇯🇵 日本专线04|BGP|流媒体
+  server: aws-linkhy18.liangxin1.xyz
+  port: 60000
+  type: hysteria2
+  ports: 60000-65530
+  password: 028f9652-beca-44d0-83b2-337bd3dc9fce
+  sni: bilibili-jp4.biliimg.com
+  skip-cert-verify: true
 - name: 🇰🇷 韩国专线01|BGP|流媒体
   server: aws-linkhy21.liangxin1.xyz
   port: 60000
@@ -286,6 +471,8 @@ proxy-groups:
   proxies:
   - ♻️ 自动选择
   - DIRECT
+  - 🇯🇵 日本高速01|CTCU|0.5x
+  - 🇯🇵 日本高速02|CTCU|0.5x
   - 🇸🇬 新加坡高速01|BGP|CTCUCM
   - 🇸🇬 新加坡高速02|BGP|CTCUCM
   - 🇸🇬 新加坡高速03|BGP|CTCUCM
@@ -294,6 +481,15 @@ proxy-groups:
   - 🇸🇬 新加坡高速06|BGP|CTCU
   - 🇸🇬 新加坡高速07|BGP|CTCU
   - 🇸🇬 新加坡高速08|BGP|CTCU
+  - 🇯🇵 日本高速01|BGP|CUCM
+  - 🇯🇵 日本高速02|BGP|CUCM
+  - 🇯🇵 日本高速03|BGP|CUCM
+  - 🇯🇵 日本高速04|BGP|CUCM
+  - 🇯🇵 日本高速05|BGP|CUCM
+  - 🇯🇵 日本高速06|BGP|CTCU
+  - 🇯🇵 日本高速07|BGP|CTCU
+  - 🇯🇵 日本高速08|BGP|CTCU
+  - 🇯🇵 日本高速09|BGP|CTCU
   - 🇺🇸 美国高速01|CTCU
   - 🇺🇸 美国高速02|CTCU
   - 🇬🇧 英国伦敦|CTCU|0.1x
@@ -302,6 +498,10 @@ proxy-groups:
   - 🇸🇬 新加坡专线02|BGP|流媒体
   - 🇸🇬 新加坡专线03|BGP|流媒体
   - 🇸🇬 新加坡专线04|BGP|流媒体
+  - 🇯🇵 日本专线01|BGP|流媒体
+  - 🇯🇵 日本专线02|BGP|流媒体
+  - 🇯🇵 日本专线03|BGP|流媒体
+  - 🇯🇵 日本专线04|BGP|流媒体
   - 🇰🇷 韩国专线01|BGP|流媒体
   - 🇬🇧 英国伦敦01|流媒体|0.1x
   - 🇬🇧 英国伦敦02|流媒体|0.1x
@@ -312,6 +512,8 @@ proxy-groups:
   interval: 15
   tolerance: 30
   proxies:
+  - 🇯🇵 日本高速01|CTCU|0.5x
+  - 🇯🇵 日本高速02|CTCU|0.5x
   - 🇸🇬 新加坡高速01|BGP|CTCUCM
   - 🇸🇬 新加坡高速02|BGP|CTCUCM
   - 🇸🇬 新加坡高速03|BGP|CTCUCM
@@ -320,6 +522,15 @@ proxy-groups:
   - 🇸🇬 新加坡高速06|BGP|CTCU
   - 🇸🇬 新加坡高速07|BGP|CTCU
   - 🇸🇬 新加坡高速08|BGP|CTCU
+  - 🇯🇵 日本高速01|BGP|CUCM
+  - 🇯🇵 日本高速02|BGP|CUCM
+  - 🇯🇵 日本高速03|BGP|CUCM
+  - 🇯🇵 日本高速04|BGP|CUCM
+  - 🇯🇵 日本高速05|BGP|CUCM
+  - 🇯🇵 日本高速06|BGP|CTCU
+  - 🇯🇵 日本高速07|BGP|CTCU
+  - 🇯🇵 日本高速08|BGP|CTCU
+  - 🇯🇵 日本高速09|BGP|CTCU
   - 🇺🇸 美国高速01|CTCU
   - 🇺🇸 美国高速02|CTCU
   - 🇬🇧 英国伦敦|CTCU|0.1x
@@ -328,6 +539,10 @@ proxy-groups:
   - 🇸🇬 新加坡专线02|BGP|流媒体
   - 🇸🇬 新加坡专线03|BGP|流媒体
   - 🇸🇬 新加坡专线04|BGP|流媒体
+  - 🇯🇵 日本专线01|BGP|流媒体
+  - 🇯🇵 日本专线02|BGP|流媒体
+  - 🇯🇵 日本专线03|BGP|流媒体
+  - 🇯🇵 日本专线04|BGP|流媒体
   - 🇰🇷 韩国专线01|BGP|流媒体
   - 🇬🇧 英国伦敦01|流媒体|0.1x
   - 🇬🇧 英国伦敦02|流媒体|0.1x
@@ -349,6 +564,8 @@ proxy-groups:
   - 🚀 节点选择
   - 🎯 全球直连
   - ♻️ 自动选择
+  - 🇯🇵 日本高速01|CTCU|0.5x
+  - 🇯🇵 日本高速02|CTCU|0.5x
   - 🇸🇬 新加坡高速01|BGP|CTCUCM
   - 🇸🇬 新加坡高速02|BGP|CTCUCM
   - 🇸🇬 新加坡高速03|BGP|CTCUCM
@@ -357,6 +574,15 @@ proxy-groups:
   - 🇸🇬 新加坡高速06|BGP|CTCU
   - 🇸🇬 新加坡高速07|BGP|CTCU
   - 🇸🇬 新加坡高速08|BGP|CTCU
+  - 🇯🇵 日本高速01|BGP|CUCM
+  - 🇯🇵 日本高速02|BGP|CUCM
+  - 🇯🇵 日本高速03|BGP|CUCM
+  - 🇯🇵 日本高速04|BGP|CUCM
+  - 🇯🇵 日本高速05|BGP|CUCM
+  - 🇯🇵 日本高速06|BGP|CTCU
+  - 🇯🇵 日本高速07|BGP|CTCU
+  - 🇯🇵 日本高速08|BGP|CTCU
+  - 🇯🇵 日本高速09|BGP|CTCU
   - 🇺🇸 美国高速01|CTCU
   - 🇺🇸 美国高速02|CTCU
   - 🇬🇧 英国伦敦|CTCU|0.1x
@@ -365,10 +591,15 @@ proxy-groups:
   - 🇸🇬 新加坡专线02|BGP|流媒体
   - 🇸🇬 新加坡专线03|BGP|流媒体
   - 🇸🇬 新加坡专线04|BGP|流媒体
+  - 🇯🇵 日本专线01|BGP|流媒体
+  - 🇯🇵 日本专线02|BGP|流媒体
+  - 🇯🇵 日本专线03|BGP|流媒体
+  - 🇯🇵 日本专线04|BGP|流媒体
   - 🇰🇷 韩国专线01|BGP|流媒体
   - 🇬🇧 英国伦敦01|流媒体|0.1x
   - 🇬🇧 英国伦敦02|流媒体|0.1x
   - 🇺🇸 美国01|流媒体
+
 rules:
 - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
 - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
